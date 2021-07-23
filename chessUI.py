@@ -83,7 +83,7 @@ while running:
                 color = (103, 51, 20)
             pygame.draw.rect(
                 screen, color, pygame.Rect(25 + 50 * (j + 1), 50 * (i + 1), 50, 50)
-            )
+           ) 
 
             # drawing pieces
             if board[i][j] == 2:
