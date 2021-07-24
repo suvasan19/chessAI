@@ -17,6 +17,27 @@ from pygame.locals import (
     QUIT,
 )
 
+NUM_ROWS, NUM_COLS = 8, 8
+SQUARE_SIZE = 100
+
+# rgb
+CREAM = (243,228,198)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+class Board:
+    def __init__(self):
+        self.board = []
+        self.selected_piece = None
+        self.black_pieces = 16
+        self.white_pieces = 16
+
+    def draw_squares(self, window):
+        window.fill(BLACK)
+        for row in range(NUM_ROWS):
+            for col in range(row % 2, NUM_COLS, 2):
+                pygame.draw.rect(window, CREAM, (row*SQUARE_SIZE, col*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+
 # loading in chess piece pngs
 b_bishop = pygame.image.load("pieces/b_bishop.png")
 b_bishop.set_colorkey((255, 255, 255), RLEACCEL)
@@ -48,32 +69,37 @@ w_rook.set_colorkey((255, 255, 255), RLEACCEL)
 pygame.init()
 
 # set up the drawing window
-screen = pygame.display.set_mode([550, 500])
+screen = pygame.display.set_mode([800, 800]) #was 550 500
+# caption of window
+pygame.display.set_caption('Chess')
 
 # initial chess board
-board = [
-    [2, 3, 4, 5, 6, 4, 3, 2],
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [2, 3, 4, 5, 6, 4, 3, 2],
-]
+#board = [
+#    [2, 3, 4, 5, 6, 4, 3, 2],
+#    [1, 1, 1, 1, 1, 1, 1, 1],
+#    [0, 0, 0, 0, 0, 0, 0, 0],
+#    [0, 0, 0, 0, 0, 0, 0, 0],
+#    [0, 0, 0, 0, 0, 0, 0, 0],
+#    [0, 0, 0, 0, 0, 0, 0, 0],
+#    [1, 1, 1, 1, 1, 1, 1, 1],
+#    [2, 3, 4, 5, 6, 4, 3, 2],
+#]
 
 
 # infinite loop for pygame
 running = True
 while running:
+    board = Board()
     # Did the user click the window close button?
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # fill the background with brown-ish
-    screen.fill((208, 97, 17))
+    board.draw_squares(screen)
+    # update display or something? idk wht this line does
+    pygame.display.flip()
 
+''' 
     # draw 64 squares
     for i in range(0, 8):
         for j in range(0, 8):
@@ -93,9 +119,8 @@ while running:
                     rook = pygame.transform.smoothscale(w_rook, (40, 40))
                 piece = rook.get_rect(center=(50 + 50 * (j + 1), 25 + 50 * (i + 1)))
                 screen.blit(rook, piece)
+'''
 
-    # update display or something? idk wht this line does
-    pygame.display.flip()
 
 # quit the program
 pygame.quit()
