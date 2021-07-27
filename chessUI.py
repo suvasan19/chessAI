@@ -1,5 +1,7 @@
 # imports
 from array import *
+
+from pygame.constants import JOYHATMOTION
 from board import Board
 from game import *
 
@@ -72,7 +74,7 @@ while running:
     board.draw_squares(screen)
 
     # if mouse is clicked, highlight piece and its moves
-    if clicked == True:
+    if clicked == True and board.board[y][x] != 0:
         # highlight the square
         highlight = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))  # the size of your rect
         highlight.set_alpha(128)  # alpha level
@@ -80,6 +82,19 @@ while running:
         screen.blit(highlight, (x * SQUARE_SIZE, y * SQUARE_SIZE))
 
         # figure out which piece it is
+        moves = findMoves(board.board, y, x, True, "black")
+        print(moves)
+        # if moves not empty, highlight the moves
+        if moves:
+            for i in range(len(moves)):
+                j, k = moves[i]
+                # highlight the square
+                highlight = pygame.Surface(
+                    (SQUARE_SIZE, SQUARE_SIZE)
+                )  # the size of your rect
+                highlight.set_alpha(128)  # alpha level
+                highlight.fill((186, 208, 107))  # this fills the entire surface
+                screen.blit(highlight, (j * SQUARE_SIZE, k * SQUARE_SIZE))
 
     # draw pieces on board
     board.draw_pieces(screen)
