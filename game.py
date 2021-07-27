@@ -1,6 +1,6 @@
 
 def findMoves(board, x,y, first, player):
-    if player == "white":
+    if player == True:
         one = 1
     else:
         one = -1
@@ -19,7 +19,13 @@ def findMoves(board, x,y, first, player):
         # Moves forward 1 if not blocked
         if(board[x][y+one] == 0):
             moves.append((x,y+one))
-        
+
+        #Check if diagonal has an opposite piece
+        if(board[x+one][y+one] != player):
+            moves.append((x+one,y+one))
+        if(board[x-one][y+one] != player):
+            moves.append((x-one,y+one))
+            
         return moves
 
     #Rook = 2
