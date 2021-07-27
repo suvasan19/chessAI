@@ -1,7 +1,8 @@
-
-def findMoves(board, x,y, first, player):
+def findMoves(board, x, y, player):
+    # player = true (black)
     if player == True:
         one = 1
+    # white
     else:
         one = -1
 
@@ -10,46 +11,52 @@ def findMoves(board, x,y, first, player):
     Returns the 
     """
 
+    piece = board[x][y]
+
     # Pawn = 1
-    if(board[x][y] == 1):
-        #if first move for pawn, returns 1 and 2 moves
-        if(first):
-            return [(x,y+one),(x,y+one+one)]
+    if abs(piece) == 1:
+
+        if (piece == 1 and x == 1) or (piece == -1 and x == 6):
+            first = True
+
+        # if first move for pawn, returns 1 and 2 moves
+        if first:
+            return [(x, y + one), (x, y + one + one)]
 
         # Moves forward 1 if not blocked
-        if(board[x][y+one] == 0):
-            moves.append((x,y+one))
+        if board[x][y + one] == 0:
+            moves.append((x, y + one))
 
-        #Check if diagonal has an opposite piece
-        if(board[x+one][y+one] != player):
-            moves.append((x+one,y+one))
-        if(board[x-one][y+one] != player):
-            moves.append((x-one,y+one))
-            
+        # Check if diagonal has an opposite piece
+        if board[x + one][y + one] != player:
+            moves.append((x + one, y + one))
+        if board[x - one][y + one] != player:
+            moves.append((x - one, y + one))
+
         return moves
 
-    #Rook = 2
-    if(board[x][y] == 2):
-        index=1
-        #if not blocked, can move forward
-        while (y+index<8) and (board[x][y+index] == 0):
-            moves.append((x,y+index))
-            index+=1
-        index=1
-        #if not blocked, can move backwards
-        while (y-index>=0) and (board[x][y-index] == 0):
-            moves.append((x,y-index))
-            index+=1
-        index=1
-        #if not blocked, can move right
-        while (x+index<8) and (board[x+index][y] == 0):
-            moves.append((x+index,y))
-            index+=1
-        index=1
-        #if not blocked, can move left
-        while (x-index>=0) and (board[x-index][y] == 0):
-            moves.append((x-index,y))
-            index+=1
+    # Rook = 2
+    if board[x][y] == 2:
+        index = 1
+        # if not blocked, can move forward
+        while (y + index < 8) and (board[x][y + index] == 0):
+            moves.append((x, y + index))
+            index += 1
+        index = 1
+        # if not blocked, can move backwards
+        while (y - index >= 0) and (board[x][y - index] == 0):
+            moves.append((x, y - index))
+            index += 1
+        index = 1
+        # if not blocked, can move right
+        while (x + index < 8) and (board[x + index][y] == 0):
+            moves.append((x + index, y))
+            index += 1
+        index = 1
+        # if not blocked, can move left
+        while (x - index >= 0) and (board[x - index][y] == 0):
+            moves.append((x - index, y))
+            index += 1
 
         return moves
 

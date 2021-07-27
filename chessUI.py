@@ -37,18 +37,6 @@ screen = pygame.display.set_mode([800, 800])  # was 550 500
 # caption of window
 pygame.display.set_caption("Chess")
 
-# initial chess board
-# board = [
-#    [2, 3, 4, 5, 6, 4, 3, 2],
-#    [1, 1, 1, 1, 1, 1, 1, 1],
-#    [0, 0, 0, 0, 0, 0, 0, 0],
-#    [0, 0, 0, 0, 0, 0, 0, 0],
-#    [0, 0, 0, 0, 0, 0, 0, 0],
-#    [0, 0, 0, 0, 0, 0, 0, 0],
-#    [1, 1, 1, 1, 1, 1, 1, 1],
-#    [2, 3, 4, 5, 6, 4, 3, 2],
-# ]
-
 # are any squares highlighted?
 clicked = False
 x = 0
@@ -67,8 +55,8 @@ while running:
             # get x, y coords of mouse click
             x, y = pygame.mouse.get_pos()
             # standardize x, y to be coords in 8x8 array
-            x = int(x / 100)
-            y = int(y / 100)
+            x = int(x / SQUARE_SIZE)
+            y = int(y / SQUARE_SIZE)
             clicked = True
 
     board.draw_squares(screen)
@@ -82,8 +70,7 @@ while running:
         screen.blit(highlight, (x * SQUARE_SIZE, y * SQUARE_SIZE))
 
         # figure out which piece it is
-        moves = findMoves(board.board, y, x, True, "black")
-        print(moves)
+        moves = findMoves(board.board, y, x, False)
         # if moves not empty, highlight the moves
         if moves:
             for i in range(len(moves)):
@@ -94,7 +81,7 @@ while running:
                 )  # the size of your rect
                 highlight.set_alpha(128)  # alpha level
                 highlight.fill((186, 208, 107))  # this fills the entire surface
-                screen.blit(highlight, (j * SQUARE_SIZE, k * SQUARE_SIZE))
+                screen.blit(highlight, (k * SQUARE_SIZE, j * SQUARE_SIZE))
 
     # draw pieces on board
     board.draw_pieces(screen)

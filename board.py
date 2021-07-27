@@ -45,8 +45,8 @@ pieces = [
 class Board:
     def __init__(self):
         self.board = [
-            [2, 3, 4, 5, 6, 4, 3, 2],
-            [1, 1, 1, 1, 1, 1, 1, 1],
+            [-2, -3, -4, -5, -6, -4, -3, -2],
+            [-1, -1, -1, -1, -1, -1, -1, -1],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
@@ -54,6 +54,7 @@ class Board:
             [1, 1, 1, 1, 1, 1, 1, 1],
             [2, 3, 4, 5, 6, 4, 3, 2],
         ]
+        self.turn = "white"
         self.selected_piece = None
         self.black_pieces = 16
         self.white_pieces = 16
@@ -74,14 +75,9 @@ class Board:
                 if self.board[row][col] == 0:
                     continue
                 # draw all pieces
-                if row < 4:
-                    piece = pygame.transform.smoothscale(
-                        pieces[-1 * self.board[row][col]], (PIECE_SIZE, PIECE_SIZE)
-                    )
-                else:
-                    piece = pygame.transform.smoothscale(
-                        pieces[self.board[row][col]], (PIECE_SIZE, PIECE_SIZE)
-                    )
+                piece = pygame.transform.smoothscale(
+                    pieces[self.board[row][col]], (PIECE_SIZE, PIECE_SIZE)
+                )
                 window.blit(
                     piece,
                     (
