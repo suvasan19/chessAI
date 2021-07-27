@@ -1,3 +1,5 @@
+from piece import *
+
 def findMoves(board, x, y, player):
     # player = true (black)
     if player == True:
@@ -14,9 +16,8 @@ def findMoves(board, x, y, player):
     piece = board[x][y]
 
     # Pawn = 1
-    if abs(piece) == 1:
-
-        if (piece == 1 and x == 1) or (piece == -1 and x == 6):
+    if isinstance(piece, Pawn):
+        if (piece.color=="white" and x == 1) or (piece.color == "black" and x == 6):
             first = True
 
         # if first move for pawn, returns 1 and 2 moves
@@ -36,7 +37,7 @@ def findMoves(board, x, y, player):
         return moves
 
     # Rook = 2
-    if board[x][y] == 2:
+    if isinstance(piece,Rook):
         index = 1
         # if not blocked, can move forward
         while (y + index < 8) and (board[x][y + index] == 0):
