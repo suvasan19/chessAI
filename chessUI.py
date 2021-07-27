@@ -1,6 +1,7 @@
 # imports
 from array import *
 from board import Board
+from game import *
 
 # import pygame library
 import pygame
@@ -76,9 +77,9 @@ while running:
         highlight = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))  # the size of your rect
         highlight.set_alpha(128)  # alpha level
         highlight.fill((186, 208, 107))  # this fills the entire surface
-        screen.blit(
-            highlight, (x * SQUARE_SIZE, y * SQUARE_SIZE)
-        )  # (0,0) are the top-left coordinates
+        screen.blit(highlight, (x * SQUARE_SIZE, y * SQUARE_SIZE))
+
+        # figure out which piece it is
 
     # draw pieces on board
     board.draw_pieces(screen)
