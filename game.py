@@ -8,7 +8,7 @@ def findMoves(board, x, y, player):
     else:
         one = -1
 
-    moves = []
+    moves = {}
     """
     Returns the 
     """
@@ -22,17 +22,17 @@ def findMoves(board, x, y, player):
 
         # if first move for pawn, returns 1 and 2 moves
         if first:
-            return [(x, y + one), (x, y + one + one)]
+            moves.append((x, y + one), (x, y + one + one))
 
         # Moves forward 1 if not blocked
         if board[x][y + one] == 0:
             moves.append((x, y + one))
 
         # Check if diagonal has an opposite piece
-        if board[x + one][y + one] != player:
+        if board[x + one][y + one].color != piece.color:
             moves.append((x + one, y + one))
-        if board[x - one][y + one] != player:
-            moves.append((x - one, y + one))
+        if board[x + one][y - one].color != piece.color:
+            moves.append((x + one, y - one))
 
         return moves
 
