@@ -14,6 +14,7 @@ def findMoves(board, x, y, player):
     """
 
     piece = board[x][y]
+    first = False
 
     # Pawn = 1
     if isinstance(piece, Pawn):

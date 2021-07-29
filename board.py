@@ -14,7 +14,6 @@ BLACK = (0, 0, 0)
 # loading in chess piece pngs
 b_bishop1 = Bishop("black")
 b_bishop2 = Bishop("black")
-b_king1 = King("black")
 b_knight1 = Knight("black")
 b_knight2 = Knight("black")
 b_pawn1 = Pawn("black")
@@ -28,6 +27,7 @@ b_pawn8 = Pawn("black")
 b_queen1 = Queen("black")
 b_rook1 = Rook("black")
 b_rook2 = Rook("black")
+b_king1 = King("black")
 
 w_bishop1 = Bishop("white")
 w_bishop2 = Bishop("white")
@@ -90,6 +90,17 @@ class Board:
             [w_rook1, w_knight1, w_bishop1, w_queen1, w_king1, w_bishop2, w_knight2, w_rook2]
         ]
 
+        self.board_start = [
+            [2, 3, 4, 5, 6, 4, 3, 2],
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [2, 3, 4, 5, 6, 4, 3, 2],
+            ]
+
         self.turn = "white"
         self.selected_piece = None
         self.black_pieces = 16
@@ -108,11 +119,11 @@ class Board:
     def draw_pieces(self, window):
         for row in range(NUM_ROWS):
             for col in range(NUM_COLS):
-                if self.board[row][col] == 0:
+                if self.board_start[row][col] == 0:
                     continue
                 # draw all pieces
                 piece = pygame.transform.smoothscale(
-                    pieces[self.board[row][col]], (PIECE_SIZE, PIECE_SIZE)
+                    pieces[self.board_start[row][col]], (PIECE_SIZE, PIECE_SIZE)
                 )
                 window.blit(
                     piece,

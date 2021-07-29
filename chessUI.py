@@ -2,7 +2,7 @@
 from array import *
 
 from pygame.constants import JOYHATMOTION
-from board import Board
+from board import *
 from game import *
 
 # import pygame library
